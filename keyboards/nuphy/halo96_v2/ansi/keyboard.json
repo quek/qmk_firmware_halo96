@@ -16,7 +16,8 @@
         "nkro": true,
         "key_lock": true,
         "encoder": false,
-        "rgb_matrix": true
+        "rgb_matrix": true,
+        "repeat_key": true
     },
     "processor": "STM32F072",
     "bootloader": "stm32-dfu",
