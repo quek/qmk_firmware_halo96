@@ -17,7 +17,8 @@
         "key_lock": true,
         "encoder": false,
         "rgb_matrix": true,
-        "repeat_key": true
+        "repeat_key": true,
+        "combo": false
     },
     "processor": "STM32F072",
     "bootloader": "stm32-dfu",
