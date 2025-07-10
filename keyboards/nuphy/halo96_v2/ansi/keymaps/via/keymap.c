@@ -1,7 +1,7 @@
 #include QMK_KEYBOARD_H
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-  return update_tri_layer_state(state, 2, 5, 6);
+  return update_tri_layer_state(state, 1, 5, 6);
 }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
