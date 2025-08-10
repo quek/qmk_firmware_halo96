@@ -25,7 +25,7 @@
     "dynamic_keymap": {
         "layer_count": 8
     },
-    "debounce": 2,
+    "debounce": 20,
     "build": {
         "debounce_type": "sym_eager_pk"
     },
