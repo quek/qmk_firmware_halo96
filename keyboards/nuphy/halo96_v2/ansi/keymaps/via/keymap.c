@@ -1,3 +1,6 @@
+/*
+QMK_HOME="F:/dev/qmk/nuphy" QMK_FIRMWARE="F:/dev/qmk/nuphy" qmk compile -kb nuphy/halo96_v2/ansi -km via
+ */
 #include QMK_KEYBOARD_H
 
 layer_state_t layer_state_set_user(layer_state_t state) {
