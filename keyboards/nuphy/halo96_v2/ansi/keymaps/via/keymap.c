@@ -1,10 +1,50 @@
 /*
 QMK_HOME="F:/dev/qmk/nuphy" QMK_FIRMWARE="F:/dev/qmk/nuphy" qmk compile -kb nuphy/halo96_v2/ansi -km via
+FN + M + ESC で Reset モードになる。
+あるいは ESC を押しながら繋げる。
  */
 #include QMK_KEYBOARD_H
 
 layer_state_t layer_state_set_user(layer_state_t state) {
   return update_tri_layer_state(state, 1, 5, 6);
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  static bool mt_d_held = false;
+  switch (keycode) {
+  case MT(MOD_LCTL, KC_D):
+    if (record->event.pressed) {
+      mt_d_held = true;
+    } else {
+      mt_d_held = false;
+    }
+    break;
+  case KC_H:
+    if (record->event.pressed) {
+      if (mt_d_held && (get_mods() & MOD_BIT(KC_LCTL))) {
+        del_mods(MOD_BIT(KC_LCTL));
+        send_keyboard_report();
+        tap_code(KC_BSPC);
+        add_mods(MOD_BIT(KC_LCTL));
+        send_keyboard_report();
+        return false;
+      }
+    }
+    break;
+  case KC_M:
+    if (record->event.pressed) {
+      if (mt_d_held && (get_mods() & MOD_BIT(KC_LCTL))) {
+        del_mods(MOD_BIT(KC_LCTL));
+        send_keyboard_report();
+        tap_code(KC_ENT);
+        add_mods(MOD_BIT(KC_LCTL));
+        send_keyboard_report();
+        return false;
+      }
+    }
+    break;
+  }
+  return true;
 }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
