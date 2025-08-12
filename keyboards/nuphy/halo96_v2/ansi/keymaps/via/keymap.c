@@ -2,6 +2,8 @@
 QMK_HOME="F:/dev/qmk/nuphy" QMK_FIRMWARE="F:/dev/qmk/nuphy" qmk compile -kb nuphy/halo96_v2/ansi -km via
 FN + M + ESC で Reset モードになる。
 あるいは ESC を押しながら繋げる。
+
+QK_REP 0x7c79 QK_AREP alt 0x7c7a
  */
 #include QMK_KEYBOARD_H
 
@@ -20,27 +22,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     break;
   case KC_H:
-    if (record->event.pressed) {
-      if (mt_d_held && (get_mods() & MOD_BIT(KC_LCTL))) {
-        del_mods(MOD_BIT(KC_LCTL));
-        send_keyboard_report();
-        tap_code(KC_BSPC);
-        add_mods(MOD_BIT(KC_LCTL));
-        send_keyboard_report();
-        return false;
-      }
+    if (record->event.pressed && mt_d_held && (get_mods() & MOD_BIT(KC_LCTL))) {
+      del_mods(MOD_BIT(KC_LCTL));
+      send_keyboard_report();
+      tap_code(KC_BSPC);
+      add_mods(MOD_BIT(KC_LCTL));
+      send_keyboard_report();
+      return false;
     }
     break;
   case KC_M:
-    if (record->event.pressed) {
-      if (mt_d_held && (get_mods() & MOD_BIT(KC_LCTL))) {
-        del_mods(MOD_BIT(KC_LCTL));
-        send_keyboard_report();
-        tap_code(KC_ENT);
-        add_mods(MOD_BIT(KC_LCTL));
-        send_keyboard_report();
-        return false;
-      }
+    if (record->event.pressed && mt_d_held && (get_mods() & MOD_BIT(KC_LCTL))) {
+      del_mods(MOD_BIT(KC_LCTL));
+      send_keyboard_report();
+      tap_code(KC_ENT);
+      add_mods(MOD_BIT(KC_LCTL));
+      send_keyboard_report();
+      return false;
+    }
+    break;
+  case KC_O:
+    if (record->event.pressed && mt_d_held && (get_mods() & MOD_BIT(KC_LCTL))) {
+      del_mods(MOD_BIT(KC_LCTL));
+      send_keyboard_report();
+      register_code(KC_LALT);
+      tap_code(KC_GRV);
+      unregister_code(KC_LALT);
+      add_mods(MOD_BIT(KC_LCTL));
+      send_keyboard_report();
+      return false;
     }
     break;
   }
