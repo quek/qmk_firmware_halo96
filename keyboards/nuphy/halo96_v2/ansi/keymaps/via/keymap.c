@@ -1,15 +1,24 @@
 /*
+コンパイルしてフラッシュ
+QMK_HOME="F:/dev/qmk/nuphy" QMK_FIRMWARE="F:/dev/qmk/nuphy" qmk flash -kb nuphy/halo96_v2/ansi -km via
+あるいはコンパイルして QMK Toolbox でフラッシュ
 QMK_HOME="F:/dev/qmk/nuphy" QMK_FIRMWARE="F:/dev/qmk/nuphy" qmk compile -kb nuphy/halo96_v2/ansi -km via
+
 FN + M + ESC で Reset モードになる。
-あるいは ESC を押しながら繋げる。
+あるいは ESC を押しながら繋げる。こちらだと VIA の設定がクリアされる。
 
 QK_REP 0x7c79 QK_AREP alt 0x7c7a
  */
 #include QMK_KEYBOARD_H
 
-layer_state_t layer_state_set_user(layer_state_t state) {
-  return update_tri_layer_state(state, 1, 5, 6);
-}
+/* layer_state_t layer_state_set_user(layer_state_t state) { */
+/*   return update_tri_layer_state(state, 1, 5, 6); */
+/* } */
+const uint16_t PROGMEM combo1[] = {KC_LCTL, LT(1,KC_SPC), COMBO_END};
+combo_t key_combos[] = {
+  COMBO(combo1, MO(2)),
+};
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   static bool mt_d_held = false;
