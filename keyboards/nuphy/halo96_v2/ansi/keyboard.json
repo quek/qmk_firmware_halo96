@@ -18,7 +18,7 @@
         "encoder": false,
         "rgb_matrix": true,
         "repeat_key": true,
-        "combo": false
+        "combo": true
     },
     "processor": "STM32F072",
     "bootloader": "stm32-dfu",
